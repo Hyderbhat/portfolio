@@ -173,19 +173,19 @@ const developer = {
             <div className="relative glass-card rounded-2xl border border-white/10 overflow-hidden shadow-2xl bg-[#141414]/90 backdrop-blur-xl">
               
               {/* Window Header */}
-              <div className="px-4 py-3 bg-[#1A1A1A] border-b border-white/10 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="w-3 h-3 rounded-full bg-[#FF5F56]/80" />
-                  <span className="w-3 h-3 rounded-full bg-[#FFBD2E]/80" />
-                  <span className="w-3 h-3 rounded-full bg-[#27C93F]/80" />
-                  <span className="ml-2 text-xs font-mono text-[#B5B5B5]">hyder-bhat.config.ts</span>
+              <div className="px-3 sm:px-4 py-2.5 sm:py-3 bg-[#1A1A1A] border-b border-white/10 flex items-center justify-between gap-2 overflow-x-auto">
+                <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+                  <span className="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-[#FF5F56]/80" />
+                  <span className="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-[#FFBD2E]/80" />
+                  <span className="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-[#27C93F]/80" />
+                  <span className="ml-1 text-[11px] sm:text-xs font-mono text-[#B5B5B5] hidden sm:inline">hyder-bhat.config.ts</span>
                 </div>
 
                 {/* Tab Controls */}
-                <div className="flex items-center gap-1 bg-black/40 p-1 rounded-lg border border-white/5">
+                <div className="flex items-center gap-0.5 sm:gap-1 bg-black/40 p-0.5 sm:p-1 rounded-lg border border-white/5 shrink-0">
                   <button
                     onClick={() => setActiveTab('ide')}
-                    className={`px-2.5 py-1 rounded text-[11px] font-mono flex items-center gap-1.5 transition-all ${
+                    className={`px-2 sm:px-2.5 py-1 rounded text-[10px] sm:text-[11px] font-mono flex items-center gap-1 transition-all ${
                       activeTab === 'ide' ? 'bg-[#D8C3A5] text-[#0D0D0D] font-bold' : 'text-[#B5B5B5] hover:text-white'
                     }`}
                   >
@@ -194,7 +194,7 @@ const developer = {
                   </button>
                   <button
                     onClick={() => setActiveTab('terminal')}
-                    className={`px-2.5 py-1 rounded text-[11px] font-mono flex items-center gap-1.5 transition-all ${
+                    className={`px-2 sm:px-2.5 py-1 rounded text-[10px] sm:text-[11px] font-mono flex items-center gap-1 transition-all ${
                       activeTab === 'terminal' ? 'bg-[#D8C3A5] text-[#0D0D0D] font-bold' : 'text-[#B5B5B5] hover:text-white'
                     }`}
                   >
@@ -203,7 +203,7 @@ const developer = {
                   </button>
                   <button
                     onClick={() => setActiveTab('architecture')}
-                    className={`px-2.5 py-1 rounded text-[11px] font-mono flex items-center gap-1.5 transition-all ${
+                    className={`px-2 sm:px-2.5 py-1 rounded text-[10px] sm:text-[11px] font-mono flex items-center gap-1 transition-all ${
                       activeTab === 'architecture' ? 'bg-[#D8C3A5] text-[#0D0D0D] font-bold' : 'text-[#B5B5B5] hover:text-white'
                     }`}
                   >

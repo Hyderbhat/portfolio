@@ -1,7 +1,7 @@
 import { Project, SkillCategory, ExperienceItem, EducationItem, Testimonial } from '../types';
 import hiregenyxImg from '../assets/hiregenyx.png';
 import metjkImg from '../assets/metjk.png';
-import learninggleeImg from '../assets/learninglee.png';
+import learningleeImg from '../assets/learninglee.png';
 import hytrackSvg from '../assets/hytrack.svg';
 
 export const PERSONAL_INFO = {
@@ -66,8 +66,8 @@ export const PROJECTS_DATA: Project[] = [
     ]
   },
   {
-    id: 'learning-glee',
-    title: 'Learning Glee',
+    id: 'learning-lee',
+    title: 'Learning Lee',
     subtitle: 'Educational & Community NGO Platform',
     category: 'Featured Project',
     description: 'Designed and built a responsive web platform for a community educational initiative using HTML, CSS, JavaScript, PHP, and MySQL, enabling donations, programme showcases, and community engagement.',
@@ -76,7 +76,7 @@ export const PROJECTS_DATA: Project[] = [
     impact: 'Empowers families across communities with accessible educational support and streamlined donor participation.',
     techStack: ['HTML5', 'CSS3', 'JavaScript', 'PHP', 'MySQL'],
     featured: true,
-    image: learninggleeImg,
+    image: learningleeImg,
     mockupType: 'laptop',
     githubUrl: 'https://github.com/Hyderbhat',
     demoUrl: 'https://learning-lee.netlify.app/',
@@ -227,7 +227,7 @@ Full-Stack Developer with hands-on experience building modern web applications u
   projects: `Projects:
 1. HireGenyx – Staffing & Proposal Services Platform
 2. MET JK – School Website
-3. Learning Glee – Educational & Community NGO Platform
+3. Learning Lee – Educational & Community NGO Platform
 4. HyTrack – Personal Finance Tracker`,
   experience: `Experience:
 • Full-Stack Developer Intern – Siffrum Analytics Pvt. Ltd. (3 Months)
