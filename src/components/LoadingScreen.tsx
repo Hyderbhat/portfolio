@@ -44,7 +44,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
           <div className="flex justify-between items-center text-xs font-mono tracking-widest text-[#B5B5B5]/60 uppercase">
             <span className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-[#D8C3A5] animate-pulse" />
-              Hyder Bhat — Studio 2026
+              Hyder Bhat — 2026
             </span>
             <span>Full Stack & UI Architecture</span>
           </div>
@@ -75,7 +75,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
               <span className="uppercase tracking-widest">INITIALIZING STUDIO RUNTIME</span>
               <span className="text-lg font-bold text-[#D8C3A5]">{progress}%</span>
             </div>
-            
+
             {/* Progress line */}
             <div className="w-full h-[2px] bg-white/10 overflow-hidden rounded-full">
               <motion.div

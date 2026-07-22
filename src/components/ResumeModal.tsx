@@ -32,16 +32,28 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
           className="glass-card rounded-2xl max-w-5xl w-full border border-white/10 bg-[#121212] text-[#F5F5F5] my-auto max-h-[94vh] overflow-y-auto p-4 sm:p-8 space-y-6 shadow-2xl"
         >
           {/* Header Action Bar */}
-          <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-white/10 print:hidden">
-            <div className="flex items-center gap-3">
-              <FileText className="w-5 h-5 text-[#D8C3A5]" />
-              <div>
-                <h3 className="text-base sm:text-lg font-bold font-heading text-[#F5F5F5]">Hyder Bhat — Curriculum Vitae</h3>
-                <p className="text-[11px] font-mono text-[#A3B18A]">Hyder_Bhat_Resume.pdf</p>
+          <div className="space-y-3 pb-4 border-b border-white/10 print:hidden">
+            {/* Top Bar: Title & Close Button */}
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex items-center gap-2.5">
+                <FileText className="w-5 h-5 text-[#D8C3A5] shrink-0" />
+                <div>
+                  <h3 className="text-base sm:text-lg font-bold font-heading text-[#F5F5F5] leading-tight">Hyder Bhat — Curriculum Vitae</h3>
+                  <p className="text-[10px] sm:text-[11px] font-mono text-[#A3B18A]">Hyder_Bhat_Resume.pdf</p>
+                </div>
               </div>
+
+              <button
+                onClick={onClose}
+                className="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-[#B5B5B5] hover:text-white transition-all shrink-0 border border-white/10"
+                title="Close Modal"
+              >
+                <X className="w-4 h-4" />
+              </button>
             </div>
 
-            <div className="flex flex-wrap items-center gap-2">
+            {/* Controls Row: View Switcher & Download PDF */}
+            <div className="flex flex-wrap items-center justify-between gap-2.5 pt-1">
               {/* Toggle Web View vs PDF Document */}
               <div className="flex items-center bg-white/5 p-1 rounded-lg border border-white/10">
                 <button
@@ -79,13 +91,6 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
                 <Download className="w-3.5 h-3.5" />
                 <span>Download PDF</span>
               </a>
-
-              <button
-                onClick={onClose}
-                className="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-[#B5B5B5] hover:text-white transition-all ml-1"
-              >
-                <X className="w-4 h-4" />
-              </button>
             </div>
           </div>
 
