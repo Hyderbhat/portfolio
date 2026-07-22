@@ -20,13 +20,13 @@ export const CustomCursor: React.FC<CustomCursorProps> = ({ enabled = true }) =>
   const [visible, setVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
-  // Smooth springs for outer ring
-  const cursorX = useSpring(-100, { stiffness: 450, damping: 30 });
-  const cursorY = useSpring(-100, { stiffness: 450, damping: 30 });
+  // Smooth fluid spring physics for outer ring
+  const cursorX = useSpring(-100, { stiffness: 240, damping: 22, mass: 0.5 });
+  const cursorY = useSpring(-100, { stiffness: 240, damping: 22, mass: 0.5 });
 
-  // Direct position for dot
-  const dotX = useSpring(-100, { stiffness: 1000, damping: 50 });
-  const dotY = useSpring(-100, { stiffness: 1000, damping: 50 });
+  // Responsive pinpoint spring for inner dot
+  const dotX = useSpring(-100, { stiffness: 750, damping: 35 });
+  const dotY = useSpring(-100, { stiffness: 750, damping: 35 });
 
   useEffect(() => {
     const checkPointer = () => {

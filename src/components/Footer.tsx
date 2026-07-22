@@ -73,9 +73,6 @@ export const Footer: React.FC = () => {
         {/* Quote & Copyright Row */}
         <div className="pt-8 border-t border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs font-mono text-[#B5B5B5]/60">
           <p>© {new Date().getFullYear()} Hyder Bhat. All rights reserved.</p>
-          <p className="flex items-center gap-1">
-            <span>Built with React 19, TypeScript, Tailwind v4 & Motion</span>
-          </p>
         </div>
 
       </div>
