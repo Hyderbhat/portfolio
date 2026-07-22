@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { FileText, Printer, Download, X } from 'lucide-react';
+import { FileText, Download, X } from 'lucide-react';
 import { PERSONAL_INFO, EXPERIENCE_DATA, EDUCATION_DATA, SKILL_CATEGORIES, PROJECTS_DATA } from '../data/portfolioData';
 import { soundFX } from '../utils/sound';
 import resumePdf from '../assets/Hyder_Bhat_Resume (1).pdf';
@@ -11,14 +11,9 @@ interface ResumeModalProps {
 }
 
 export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => {
-  const [viewMode, setViewMode] = useState<'pdf' | 'web'>('pdf');
+  const [viewMode, setViewMode] = useState<'web' | 'pdf'>('web');
 
   if (!isOpen) return null;
-
-  const handlePrint = () => {
-    soundFX.playClick();
-    window.print();
-  };
 
   return (
     <AnimatePresence>
@@ -47,19 +42,8 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
             </div>
 
             <div className="flex flex-wrap items-center gap-2">
-              {/* Toggle PDF Document vs Web Format */}
+              {/* Toggle Web View vs PDF Document */}
               <div className="flex items-center bg-white/5 p-1 rounded-lg border border-white/10">
-                <button
-                  onClick={() => {
-                    soundFX.playClick();
-                    setViewMode('pdf');
-                  }}
-                  className={`px-3 py-1 text-xs font-mono rounded-md transition-all ${
-                    viewMode === 'pdf' ? 'bg-[#D8C3A5] text-[#0D0D0D] font-bold' : 'text-[#B5B5B5] hover:text-white'
-                  }`}
-                >
-                  PDF Document
-                </button>
                 <button
                   onClick={() => {
                     soundFX.playClick();
@@ -70,6 +54,17 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
                   }`}
                 >
                   Web View
+                </button>
+                <button
+                  onClick={() => {
+                    soundFX.playClick();
+                    setViewMode('pdf');
+                  }}
+                  className={`px-3 py-1 text-xs font-mono rounded-md transition-all ${
+                    viewMode === 'pdf' ? 'bg-[#D8C3A5] text-[#0D0D0D] font-bold' : 'text-[#B5B5B5] hover:text-white'
+                  }`}
+                >
+                  PDF Document
                 </button>
               </div>
 
@@ -84,16 +79,6 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
                 <Download className="w-3.5 h-3.5" />
                 <span>Download PDF</span>
               </a>
-
-              {viewMode === 'web' && (
-                <button
-                  onClick={handlePrint}
-                  className="px-3.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-mono text-[#D8C3A5] border border-white/10 flex items-center gap-1.5 transition-all"
-                >
-                  <Printer className="w-3.5 h-3.5" />
-                  <span>Print</span>
-                </button>
-              )}
 
               <button
                 onClick={onClose}
