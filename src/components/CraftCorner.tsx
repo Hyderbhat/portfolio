@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { motion, useSpring } from 'motion/react';
-import { Sparkles, Sliders, Palette, Terminal, RefreshCw, Move, Layers, Zap } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { motion, useMotionValue, animate } from 'motion/react';
+import { Sparkles, Palette, RefreshCw, Move, Zap } from 'lucide-react';
 import { soundFX } from '../utils/sound';
 
 export const CraftCorner: React.FC = () => {
@@ -8,14 +8,18 @@ export const CraftCorner: React.FC = () => {
   const [damping, setDamping] = useState(15);
   const [selectedTheme, setSelectedTheme] = useState<'beige' | 'sage' | 'indigo' | 'amber'>('beige');
 
-  // Spring physics box motion
-  const boxX = useSpring(0, { stiffness, damping });
-  const boxY = useSpring(0, { stiffness, damping });
+  const stageRef = useRef<HTMLDivElement>(null);
+
+  // Motion values for drag box position
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
 
   const resetBox = () => {
     soundFX.playClick();
-    boxX.set(0);
-    boxY.set(0);
+    setStiffness(250);
+    setDamping(15);
+    animate(x, 0, { type: 'spring', stiffness: 250, damping: 15 });
+    animate(y, 0, { type: 'spring', stiffness: 250, damping: 15 });
   };
 
   const themeAccents = {
@@ -48,16 +52,16 @@ export const CraftCorner: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           
           {/* Spring Physics Interactive Stage */}
-          <div className="lg:col-span-7 glass-card rounded-2xl p-6 sm:p-8 border border-white/10 flex flex-col justify-between space-y-6 bg-[#141414]">
+          <div className="lg:col-span-7 glass-card rounded-2xl p-5 sm:p-8 border border-white/10 flex flex-col justify-between space-y-6 bg-[#141414]">
             
             <div className="flex items-center justify-between pb-4 border-b border-white/10 text-xs font-mono text-[#B5B5B5]">
               <div className="flex items-center gap-2">
                 <Move className="w-4 h-4 text-[#D8C3A5]" />
-                <span className="text-[#F5F5F5] font-bold uppercase">Physics Drag Stage</span>
+                <span className="text-[#F5F5F5] font-bold uppercase text-[11px] sm:text-xs">Physics Drag Stage</span>
               </div>
               <button
                 onClick={resetBox}
-                className="flex items-center gap-1.5 px-3 py-1 rounded bg-white/5 hover:bg-white/10 text-[#D8C3A5] transition-colors"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-[#D8C3A5] transition-all border border-white/10 active:scale-95 text-xs font-mono"
                 data-cursor="button"
               >
                 <RefreshCw className="w-3 h-3" />
@@ -65,28 +69,35 @@ export const CraftCorner: React.FC = () => {
               </button>
             </div>
 
-            {/* Interactive Canvas Canvas Area */}
-            <div className="relative h-64 sm:h-72 rounded-xl bg-[#0D0D0D] border border-white/5 flex items-center justify-center overflow-hidden bg-grain select-none">
-              <p className="absolute text-[10px] font-mono text-[#B5B5B5]/30 uppercase tracking-widest pointer-events-none">
-                [ Click & Drag Spring Box ]
+            {/* Interactive Canvas Area */}
+            <div
+              ref={stageRef}
+              className="relative h-60 sm:h-72 w-full rounded-xl bg-[#0D0D0D] border border-white/5 flex items-center justify-center overflow-hidden bg-grain select-none touch-none p-4"
+            >
+              <p className="absolute text-[10px] sm:text-xs font-mono text-[#B5B5B5]/30 uppercase tracking-widest pointer-events-none text-center px-4">
+                [ CLICK & DRAG SPRING BOX ]
               </p>
 
               <motion.div
                 drag
-                dragConstraints={{ left: -140, right: 140, top: -80, bottom: 80 }}
-                dragElastic={0.2}
+                dragConstraints={stageRef}
+                dragElastic={0.15}
+                dragMomentum={false}
                 onDragStart={() => soundFX.playClick()}
                 onDragEnd={() => soundFX.playSuccess()}
-                className="w-24 h-24 rounded-2xl cursor-grab active:cursor-grabbing border border-white/20 flex flex-col items-center justify-center p-3 text-center shadow-2xl transition-shadow"
+                className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl cursor-grab active:cursor-grabbing border border-white/20 flex flex-col items-center justify-center p-2.5 text-center shadow-2xl transition-shadow touch-none shrink-0"
                 style={{
+                  x,
+                  y,
                   backgroundColor: themeAccents[selectedTheme].code,
                   color: '#0D0D0D',
                 }}
+                transition={{ type: 'spring', stiffness, damping }}
                 data-cursor="button"
                 data-cursor-text="DRAG"
               >
-                <Zap className="w-6 h-6 mb-1" />
-                <span className="text-[10px] font-mono font-bold uppercase tracking-wider">Physics</span>
+                <Zap className="w-5 h-5 sm:w-6 sm:h-6 mb-1" />
+                <span className="text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-wider">Physics</span>
               </motion.div>
             </div>
 
@@ -126,7 +137,7 @@ export const CraftCorner: React.FC = () => {
           </div>
 
           {/* Theme & Code Architecture Tuning Card */}
-          <div className="lg:col-span-5 glass-card rounded-2xl p-6 sm:p-8 border border-white/10 flex flex-col justify-between space-y-6 bg-[#141414]">
+          <div className="lg:col-span-5 glass-card rounded-2xl p-5 sm:p-8 border border-white/10 flex flex-col justify-between space-y-6 bg-[#141414]">
             
             <div className="space-y-4">
               <div className="flex items-center gap-2 text-xs font-mono text-[#D8C3A5] uppercase tracking-wider">
@@ -134,7 +145,7 @@ export const CraftCorner: React.FC = () => {
                 <span>Color Accent Architecture</span>
               </div>
 
-              <p className="text-xs text-[#B5B5B5] leading-relaxed">
+              <p className="text-xs text-[#B5B5B5] leading-relaxed font-light">
                 Select an accent tone to see how theme tokens map across UI components in real time.
               </p>
 
@@ -152,10 +163,10 @@ export const CraftCorner: React.FC = () => {
                         : 'border-white/5 bg-white/[0.02] text-[#B5B5B5] hover:border-white/20'
                     }`}
                   >
-                    <span className={`w-4 h-4 rounded-full ${accent.bg}`} />
-                    <div className="text-xs font-mono">
-                      <p className="font-bold leading-none">{accent.name}</p>
-                      <p className="text-[10px] text-[#B5B5B5]/60">{accent.code}</p>
+                    <span className={`w-4 h-4 rounded-full ${accent.bg} shrink-0`} />
+                    <div className="text-xs font-mono truncate">
+                      <p className="font-bold leading-none truncate">{accent.name}</p>
+                      <p className="text-[10px] text-[#B5B5B5]/60 mt-0.5">{accent.code}</p>
                     </div>
                   </button>
                 ))}
@@ -168,7 +179,7 @@ export const CraftCorner: React.FC = () => {
                 <span>// Motion Config Generated</span>
                 <span className="text-[#A3B18A]">60 FPS</span>
               </div>
-              <pre className="text-[#D8C3A5]">
+              <pre className="text-[#D8C3A5] overflow-x-auto">
                 <code>{`const transition = {
   type: "spring",
   stiffness: ${stiffness},
